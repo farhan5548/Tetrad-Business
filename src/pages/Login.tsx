@@ -13,11 +13,19 @@ const Login = () => {
   const [userLogin] = useLoginMutation();
 
   async function btnLogin() {
-    const response = await userLogin({ email, password });
-    console.log(JSON.stringify(response));
-    console.log(email);
-    console.log(password);
-    dispatch(setToken(""));
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+
+    try {
+      const response = await userLogin({ email, password }).unwrap();
+      dispatch(setToken(response?.result?.access_token));
+      console.log("Login successful, token:", response?.result?.access_token);
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Login failed, please check your credentials.");
+    }
   }
 
   return (

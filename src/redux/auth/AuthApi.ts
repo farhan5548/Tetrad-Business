@@ -9,7 +9,10 @@ export const authApi = createApi({
       "https://tetrad-business-709354661385.europe-west2.run.app/api/v1/",
   }),
   endpoints: (build) => ({
-    login: build.mutation<any, string>({
+    login: build.mutation<
+      { result: { access_token: string } },
+      { email: string; password: string }
+    >({
       query: (body) => ({
         url: `auth/login`,
         method: "POST",
