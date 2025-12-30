@@ -1,6 +1,7 @@
 import { Box, Typography, Button, Divider } from "@mui/material";
 
 const UserProfile = () => {
+
   return (
     <Box
       sx={{
@@ -47,7 +48,9 @@ const UserProfile = () => {
             <Typography variant="subtitle2" color="textSecondary">
               User Email
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: 500 }}></Typography>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              abc@123
+            </Typography>
           </Box>
         </Box>
         <Box>

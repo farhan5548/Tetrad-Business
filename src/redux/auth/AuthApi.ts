@@ -1,21 +1,15 @@
-import type { RootState } from "@reduxjs/toolkit/query";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+// import type { Pokemon } from './types'
 
+// Define a service using a base URL and expected endpoints
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl:
       "https://tetrad-business-709354661385.europe-west2.run.app/api/v1/",
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
   }),
   endpoints: (build) => ({
-    login: build.mutation<any, { email: string; password: string }>({
+    login: build.mutation<any, string>({
       query: (body) => ({
         url: `auth/login`,
         method: "POST",
@@ -25,4 +19,6 @@ export const authApi = createApi({
   }),
 });
 
+// Export hooks for usage in functional components, which are
+// auto-generated based on the defined endpoints
 export const { useLoginMutation } = authApi;

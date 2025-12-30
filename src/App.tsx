@@ -5,17 +5,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import type { RootState } from "./redux/store";
 
 function App() {
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter> 
         <Routes>
-          <Route
-            path="/"
-            element={isAuthenticated ? <UserProfile /> : <Login />}
-          />
+          {isAuthenticated ? (
+            <Route path="/" element={<UserProfile />} />
+          ) : (
+            <Route path="/" element={<Login />} />
+          )}
         </Routes>
       </BrowserRouter>
     </>

@@ -8,22 +8,16 @@ import { useLoginMutation } from "../redux/auth/AuthApi";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const dispatch = useDispatch();
 
   const [userLogin] = useLoginMutation();
 
   async function btnLogin() {
-    try {
-      const response = await userLogin({ email, password }).unwrap();
-      dispatch(setToken(response.token));
-    } catch (error) {
-      alert("Login failed");
-    }
-
+    const response = await userLogin({ email, password });
     console.log(JSON.stringify(response));
     console.log(email);
     console.log(password);
+    dispatch(setToken(""));
   }
 
   return (
